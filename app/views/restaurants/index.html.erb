@@ -1,0 +1,7 @@
+<h1>All restaurants</h1>
+<p><%= link_to "Add +", new_restaurant_path, style:"text-decoration: none;" %></p>
+<ol>
+  <% @restaurants.each do |restaurant| %>
+    <li><%= link_to restaurant.name, restaurant_path(restaurant), style: "text-decoration: none;" %></li>
+  <% end %>
+</ol>

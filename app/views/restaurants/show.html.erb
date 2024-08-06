@@ -1,0 +1,8 @@
+<p><%= link_to "<< Restaurants", restaurants_path, style: "text-decoration: none;" %></p>
+<h1><%= @restaurant.name %></h1>
+<p><%= link_to "(Edit)", edit_restaurant_path(@restaurant), style: "text-decoration: none" %></p>
+<ul style="list-style-type: none;">
+  <li><%= link_to "Delete",
+          restaurant_path(@restaurant),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}  %></li>
+</ul>
