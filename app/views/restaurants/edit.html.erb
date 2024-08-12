@@ -1,0 +1,4 @@
+<%= link_to "<< Back", restaurant_path(@restaurant), style: "text-decoration: none;" %>
+<h1><%= @restaurant.name %></h1>
+
+<%= render "form", restaurant: @restaurant %>
