@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
-  before_action :set_restaurants, only: %i[show edit destroy]
+  before_action :set_restaurant, only: %i[show edit update destroy]
   def index
-    @restaurants = Restaurant.all
+    @restaurants = policy_scope(Restaurant)
   end
 
   def show
@@ -9,10 +9,13 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    authorize @restaurant
   end
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.user_id = current_user.id
+    authorize @restaurant
     if @restaurant.save
       redirect_to @restaurant, notice: 'Restaurant was successfully added'
     else
@@ -39,8 +42,9 @@ class RestaurantsController < ApplicationController
 
   private
 
-  def set_restaurants
+  def set_restaurant
     @restaurant = Restaurant.find(params[:id])
+    authorize @restaurant
   end
 
   def restaurant_params
